@@ -1,5 +1,5 @@
 :root {
-    --bg-color: #dcdcd6; /* warm grey page background */
+    --bg-color: #ffffff; /* clean white page background */
     --text-dark: #1e352f;
     --text-light: #ffffff;
     --primary-lime: #a2b72f; /* yellowish green */
@@ -41,8 +41,26 @@ body {
     letter-spacing: -0.5px;
 }
 
+.mobile-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--dark-green);
+    cursor: pointer;
+    padding: 5px;
+    z-index: 100;
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    justify-content: space-between;
+}
+
 .nav-links {
     display: flex;
+    margin-left: 40px;
     gap: 30px;
 }
 
@@ -58,7 +76,7 @@ body {
 
 .nav-links a.active,
 .nav-links a:hover {
-    background-color: #cfceca; /* slightly darker than body */
+    background-color: #f0f0f0; /* slightly darker than body */
 }
 
 .nav-actions {
@@ -527,7 +545,7 @@ body {
 /* WHY CHOOSE US SECTION */
 .why-section {
     padding: 120px 40px;
-    background-color: #c5c6c0; /* light warm grey */
+    background-color: #f4f5f6; /* light grey to distinguish section */
     text-align: center;
     overflow: hidden;
 }
@@ -641,7 +659,7 @@ body {
 /* PROJECTS CAROUSEL SECTION */
 .projects-section {
     padding: 100px 0 100px 0;
-    background-color: #c5c6c0; /* Same as why-section */
+    background-color: #f4f5f6; /* Same as why-section */
     overflow: hidden;
 }
 
@@ -1419,11 +1437,53 @@ body.hero-loaded .customer-rating {
 
 /* RESPONSIVE */
 @media (max-width: 1024px) {
-    .hero-content h1 {
-        font-size: 60px;
+    /* Navbar & Mobile Menu */
+    .mobile-toggle {
+        display: block;
     }
-    .hero-image-wrapper {
-        height: 500px;
+    .nav-menu {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(10px);
+        padding: 30px 40px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        border-top: 1px solid #eee;
+    }
+    .navbar.mobile-menu-open .nav-menu {
+        display: flex;
+    }
+    .nav-links {
+        flex-direction: column;
+        margin-left: 0;
+        gap: 20px;
+        align-items: center;
+        width: 100%;
+    }
+    .nav-actions {
+        flex-direction: column;
+        width: 100%;
+        margin-top: 30px;
+    }
+    .nav-actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* Grids */
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .why-grid {
+        grid-template-columns: 1fr;
+        gap: 60px;
+    }
+    .why-center {
+        order: -1; /* Move graphic to top */
     }
     .gr-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -1437,43 +1497,95 @@ body.hero-loaded .customer-rating {
         margin-top: -30px;
         margin-bottom: 0;
     }
-    .footer-top-content {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 40px;
-    }
-    .footer-middle {
-        flex-direction: column;
-        gap: 30px;
+    
+    /* Paddings */
+    .about-section, .services-section, .why-section, .projects-section, .contact-section {
+        padding-left: 40px;
+        padding-right: 40px;
     }
 }
 
 @media (max-width: 768px) {
-    .navbar {
-        flex-direction: column;
-        gap: 20px;
+    /* Global Padding Reductions */
+    .about-section, .services-section, .why-section, .projects-section, .contact-section, .google-reviews-section {
+        padding: 60px 20px;
     }
-    .nav-links {
-        display: none; /* simple mobile hide for demo */
+    .hero-container {
+        padding: 15px;
+    }
+
+    /* Hero Section */
+    .hero-image-wrapper {
+        height: 550px;
+        border-radius: 24px;
     }
     .hero-content {
-        left: 30px;
+        left: 20px;
+        right: 20px;
+        text-align: center;
     }
     .hero-content h1 {
-        font-size: 40px;
+        font-size: 42px;
+        margin-bottom: 30px;
+    }
+    .underline {
+        bottom: -10px;
+        height: 20px;
+    }
+    .hero-buttons {
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+    }
+    .hero-buttons .btn {
+        width: 100%;
+        justify-content: center;
     }
     .customer-rating {
         bottom: 30px;
-        right: 30px;
+        left: 50%;
+        transform: translateX(-50%);
     }
+
+    /* Features */
     .features-bar {
         flex-direction: column;
         gap: 20px;
         align-items: flex-start;
+        padding: 30px 20px;
     }
-    .google-reviews-section {
-        padding: 40px 20px;
+
+    /* About Section */
+    .about-section {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
     }
+    .award-badge {
+        justify-content: center;
+        margin-top: 20px;
+    }
+    .about-action-card {
+        justify-content: center;
+    }
+    .about-list {
+        display: inline-block;
+        text-align: left;
+        margin-top: 20px;
+    }
+
+    /* Services Grid */
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    /* Projects Carousel */
+    .project-card {
+        flex: 0 0 85vw; /* Show part of next card on mobile */
+    }
+
+    /* Google Reviews */
     .gr-header {
         flex-direction: column;
         align-items: flex-start;
@@ -1482,19 +1594,20 @@ body.hero-loaded .customer-rating {
     .gr-grid {
         grid-template-columns: 1fr;
     }
-    .contact-section {
-        padding: 60px 20px;
-    }
+
+    /* Contact */
     .contact-left, .contact-right {
         padding: 40px 20px;
     }
     .form-row {
         flex-direction: column;
     }
+
+    /* Footer */
     .site-footer {
         padding: 40px 20px;
-        margin: 10px;
-        border-radius: 20px;
+        margin: 0;
+        border-radius: 0;
     }
     .footer-cta h2 {
         font-size: 32px;
@@ -1519,4 +1632,3 @@ body.hero-loaded .customer-rating {
         text-align: center;
     }
 }
-
